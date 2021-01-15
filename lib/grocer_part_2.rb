@@ -2,22 +2,27 @@ require_relative './part_1_solution.rb'
 require 'pry'
 
 def apply_coupons(cart, coupons)
-  coupons.each do |coupon| 
-    coupon.each do |attribute, value| 
-      name = coupon[:item] 
-    
-      if cart[name] && cart[name][:count] >= coupon[:num] 
-        if cart["#{name} W/COUPON"] 
-          cart["#{name} W/COUPON"][:count] += 1 
-        else 
-          cart["#{name} W/COUPON"] = {:price => coupon[:cost], 
-          :clearance => cart[name][:clearance], :count => 1} 
+  couponed_item = {}
+  cart.each do |item|
+    coupons.each do |coupon|
+      if ((item[:item] == coupon[:item]) && (item[:count] >= coupon[:num]))
+        if item[:count] % coupon[:num] == 0 
+          item[:item] = "#{item[:item]} W/COUPON"
+          item[:price] = coupon[:cost] / coupon[:num]
+        elsif (item[:count] % coupon[:num]) != 0 
+        #binding.pry
+          couponed_item[:item] = "#{item[:item]} W/COUPON"
+          couponed_item[:count] = item[:count] - item[:count] % coupon[:num]
+          couponed_item[:price] = coupon[:cost] / coupon[:num]
+          couponed_item[:clearance] = item[:clearance]
+        #binding.pry
+          cart << couponed_item
+          item[:count] = item[:count] % coupon[:num]
+        #binding.pry
         end 
-  
-      cart[name][:count] -= coupon[:num] 
+      end
     end 
   end 
-end 
   cart 
 end
 
