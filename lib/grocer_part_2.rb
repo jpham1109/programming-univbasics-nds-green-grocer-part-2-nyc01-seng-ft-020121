@@ -31,7 +31,7 @@ end
 def apply_clearance(cart)
   cart.each do |item|
     if item[:clearance]
-      item[:price] = item[:price] - item[:price] / 5
+      item[:price] -= item[:price] / 5
     end
   end
   cart
