@@ -9,6 +9,7 @@ def apply_coupons(cart, coupons)
           item[:item] = "#{item[:item]} W/COUPON"
           item[:price] = (coupon[:cost] / coupon[:num])
         elsif (item[:count] % coupon[:num]) != 0 
+          couponed_item = {}
           couponed_item[:item] = "#{item[:item]} W/COUPON"
           couponed_item[:count] = item[:count] - (item[:count] % coupon[:num])
           couponed_item[:price] = coupon[:cost] / coupon[:num]
