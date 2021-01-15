@@ -6,9 +6,13 @@ def apply_coupons(cart, coupons)
     coupons.each do |coupon|
       if ((item[:item] == coupon[:item]) && (item[:count] >= coupon[:num]))
         if (item[:count] % coupon[:num]) == 0
-          couponed_item = item
+          couponed_item = {}
           couponed_item[:item] = "#{item[:item]} W/COUPON"
+          couponed_item[:count] = coupon[:num]
           couponed_item[:price] = (coupon[:cost] / coupon[:num])
+          couponed_item[:clearance] = item[:clearance]
+          item[:count] = item[:count] - coupon[:num]
+          cart << couponed_item
         elsif (item[:count] % coupon[:num]) != 0 
           couponed_item = {}
           couponed_item[:item] = "#{item[:item]} W/COUPON"
