@@ -14,7 +14,7 @@ def apply_coupons(cart, coupons)
           couponed_item[:count] = item[:count] - (item[:count] % coupon[:num])
           couponed_item[:price] = coupon[:cost] / coupon[:num]
           couponed_item[:clearance] = item[:clearance]
-          item[:count] = item[:count] % coupon[:num]
+          item[:count] = item[:count] - couponed_item[:count]
         #binding.pry
           cart << couponed_item
         #binding.pry
