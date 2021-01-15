@@ -2,7 +2,6 @@ require_relative './part_1_solution.rb'
 require 'pry'
 
 def apply_coupons(cart, coupons)
-  couponed_item = {}
   cart.each do |item|
     coupons.each do |coupon|
       if ((item[:item] == coupon[:item]) && (item[:count] >= coupon[:num]))
@@ -10,7 +9,7 @@ def apply_coupons(cart, coupons)
           item[:item] = "#{item[:item]} W/COUPON"
           item[:price] = (coupon[:cost] / coupon[:num])
         elsif (item[:count] % coupon[:num]) != 0 
-        #binding.pry
+          couponed_item = item
           couponed_item[:item] = "#{item[:item]} W/COUPON"
           couponed_item[:count] = item[:count] - (item[:count] % coupon[:num])
           couponed_item[:price] = coupon[:cost] / coupon[:num]
