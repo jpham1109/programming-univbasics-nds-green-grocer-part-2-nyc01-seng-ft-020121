@@ -19,7 +19,7 @@ def apply_coupons(cart, coupons)
         #binding.pry
           cart << couponed_item
           item[:count] = item[:count] % coupon[:num]
-        binding.pry
+        #binding.pry
         end 
       end
     end 
