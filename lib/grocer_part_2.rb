@@ -8,17 +8,17 @@ def apply_coupons(cart, coupons)
       #binding.pry
       if ((item[:item] == coupon[:item]) && (item[:count] >= coupon[:num]))
         if item[:count] % coupon[:num] == 0 
-        item[:item] = "#{item[:item]} W/COUPON"
-        item[:price] = coupon[:cost] / coupon[:num]
-        elsif item[:count] % coupon[:num] != 0 
+          item[:item] = "#{item[:item]} W/COUPON"
+          item[:price] = coupon[:cost] / coupon[:num]
+        elsif (item[:count] % coupon[:num]) != 0 
         #binding.pry
-        couponed_item[:item] = "#{item[:item]} W/COUPON"
-        couponed_item[:count] = item[:count] - item[:count] % coupon[:num]
-        couponed_item[:price] = coupon[:cost] / coupon[:num]
-        couponed_item[:clearance] = item[:clearance]
+          couponed_item[:item] = "#{item[:item]} W/COUPON"
+          couponed_item[:count] = item[:count] - item[:count] % coupon[:num]
+          couponed_item[:price] = coupon[:cost] / coupon[:num]
+          couponed_item[:clearance] = item[:clearance]
         #binding.pry
-        cart << couponed_item
-        item[:count] = item[:count] % coupon[:num]
+          cart << couponed_item
+          item[:count] = item[:count] % coupon[:num]
         binding.pry
         end 
       end
